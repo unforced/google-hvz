@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :players
 
   def self.create_with_omniauth(auth)
     create! do |user|
@@ -10,6 +11,14 @@ class User < ActiveRecord::Base
          user.ldap = user.email[/(.*)@google.com/, 1] || ""
       end
     end
+  end
+
+  def registered?(game = Game.current)
+    players.exists?(game_id: game)
+  end
+
+  def player(game = Game.current)
+    players.where(game_id: game).first
   end
 
 end

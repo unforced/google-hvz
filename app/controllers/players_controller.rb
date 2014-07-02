@@ -25,13 +25,16 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(player_params)
+    @player = Player.new
     @player.user = current_user
     @player.game = Game.last
+    @player.faction = Player::ZOMBIE
+    @player.score = 0
+    @player.tag_code = Player.generate_code
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to @player, notice: 'Player was successfully created. Make sure you write down your tag code' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new }

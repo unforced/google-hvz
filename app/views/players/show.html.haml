@@ -1,14 +1,12 @@
-%p#notice= notice
-
 %p
   %b User:
-  = @player.user_id
+  = link_to @player.user.name, @player.user
 %p
   %b Game:
   = @player.game_id
 %p
   %b Faction:
-  = @player.faction
+  = @player.faction_name
 %p
   %b Tag code:
   = @player.tag_code

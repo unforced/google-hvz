@@ -1,5 +1,9 @@
-%h1 New player
+%h1 Registration
 
-= render 'form'
+= simple_form_for(@player) do |f|
+  = f.error_notification
+
+  .form-actions
+    = f.button :submit, "Register"
 
 = link_to 'Back', players_path

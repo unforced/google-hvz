@@ -1,12 +1,3 @@
-%p#notice= notice
-
-%p
-  %b Start time:
-  = @game.start_time
-%p
-  %b End time:
-  = @game.end_time
-
-= link_to 'Edit', edit_game_path(@game)
-\|
-= link_to 'Back', games_path
+%ul
+  - @game.players.each do |player|
+    %li= player.user.name
