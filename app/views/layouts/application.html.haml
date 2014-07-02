@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title GoogleHvz
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-inverse{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"} HvZ@Google
+        .navbar-collapse.collapse
+          - if current_user
+            = link_to signout_path do
+              %button.btn.navbar-right{type: 'button'} Sign Out
+          - else
+            = link_to signin_path do
+              %button.btn.navbar-right{type: 'button'} Sign In
+    .jumbotron
+      .container
+        - flash.each do |key, value|
+          %div{class: flash_class(key)}
+            = value
+        = yield
+    .container
+      %footer
+        %p Google HvZ'ers

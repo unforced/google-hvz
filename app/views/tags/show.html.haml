@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Tagger:
+  = @tag.tagger_id
+%p
+  %b Tagee:
+  = @tag.tagee_id
+%p
+  %b Time:
+  = @tag.time
+
+= link_to 'Edit', edit_tag_path(@tag)
+\|
+= link_to 'Back', tags_path

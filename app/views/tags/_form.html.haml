@@ -1,0 +1,10 @@
+= simple_form_for(@tag) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :tagger_id
+    = f.input :tagee_id
+    = f.input :time
+
+  .form-actions
+    = f.button :submit

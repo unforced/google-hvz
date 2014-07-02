@@ -1,0 +1,21 @@
+%h1 Listing games
+
+%table
+  %tr
+    %th Start time
+    %th End time
+    %th
+    %th
+    %th
+
+  - @games.each do |game|
+    %tr
+      %td= game.start_time
+      %td= game.end_time
+      %td= link_to 'Show', game
+      %td= link_to 'Edit', edit_game_path(game)
+      %td= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Game', new_game_path

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @player.user_id
+%p
+  %b Game:
+  = @player.game_id
+%p
+  %b Faction:
+  = @player.faction
+%p
+  %b Tag code:
+  = @player.tag_code
+%p
+  %b Score:
+  = @player.score
+
+= link_to 'Edit', edit_player_path(@player)
+\|
+= link_to 'Back', players_path

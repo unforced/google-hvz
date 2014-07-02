@@ -28,4 +28,5 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'dotenv-rails'
 end

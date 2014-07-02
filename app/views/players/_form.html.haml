@@ -1,0 +1,12 @@
+= simple_form_for(@player) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :user_id
+    = f.input :game_id
+    = f.input :faction
+    = f.input :tag_code
+    = f.input :score
+
+  .form-actions
+    = f.button :submit

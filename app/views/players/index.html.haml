@@ -1,0 +1,27 @@
+%h1 Listing players
+
+%table
+  %tr
+    %th User
+    %th Game
+    %th Faction
+    %th Tag code
+    %th Score
+    %th
+    %th
+    %th
+
+  - @players.each do |player|
+    %tr
+      %td= player.user_id
+      %td= player.game_id
+      %td= player.faction
+      %td= player.tag_code
+      %td= player.score
+      %td= link_to 'Show', player
+      %td= link_to 'Edit', edit_player_path(player)
+      %td= link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Player', new_player_path

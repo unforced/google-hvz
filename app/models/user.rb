@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
       user.uid = auth['uid']
       if auth['info']
          user.name = auth['info']['name'] || ""
+         user.email = auth['info']['email'] || ""
+         user.ldap = user.email[/(.*)@google.com/, 1] || ""
       end
     end
   end
