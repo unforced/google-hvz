@@ -25,6 +25,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
+    @tag.tagger = current_user
 
     respond_to do |format|
       if @tag.save
@@ -69,6 +70,6 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:tagger_id, :tagee_id, :time)
+      params.require(:tag).permit(:tag_code, :time, :first_feed, :second_feed)
     end
 end

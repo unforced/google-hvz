@@ -1,0 +1,10 @@
+= simple_form_for(@feed) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :tag_id
+    = f.input :player_id
+    = f.input :time
+
+  .form-actions
+    = f.button :submit

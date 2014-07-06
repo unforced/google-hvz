@@ -23,4 +23,16 @@ class Player < ActiveRecord::Base
     when DECEASED then "Deceased"
     end
   end
+
+  def zombie?
+    faction == ZOMBIE
+  end
+
+  def deceased?
+    last_fed + 48.hours < Time.now
+  end
+
+  def last_fed
+    1.days.ago
+  end
 end

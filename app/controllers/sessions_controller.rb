@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
   def new
-    100.times{puts "HELLO"}
     redirect_to '/auth/google_oauth2'
   end
 
