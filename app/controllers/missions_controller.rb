@@ -1,5 +1,16 @@
 class MissionsController < ApplicationController
-  before_action :set_mission, only: [:show, :edit, :update, :destroy]
+  before_action :set_mission, only: [:show, :edit, :update, :check_in]
+  before_action :admin_user?, only: [:new, :create, :edit, :update]
+
+  def check_in
+    @mission.attendances.new(player: current_user.player)
+    if @mission.save
+      flash[:success] = 'Checked in for the mission! You have earned 1 point!'
+    else
+      flash[:error] = 'Failed to check in! What have you done?!?!'
+    end
+    redirect_to @mission
+  end
 
   # GET /missions
   # GET /missions.json
@@ -48,16 +59,6 @@ class MissionsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @mission.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /missions/1
-  # DELETE /missions/1.json
-  def destroy
-    @mission.destroy
-    respond_to do |format|
-      format.html { redirect_to missions_url, notice: 'Mission was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -7,4 +7,8 @@ module ApplicationHelper
     when :error then "alert alert-danger"
     end
   end
+
+  def admin?
+    current_user && current_user.admin?
+  end
 end

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :feeds
 
-  resources :missions
+  resources :missions do
+    member do
+      get :check_in
+    end
+  end
 
   resources :tags
 

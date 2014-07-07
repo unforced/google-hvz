@@ -11,6 +11,7 @@
       %td Name
       %td LDAP
       %td Faction
+      %td Time to Starvation
       %td Score
   %tbody
     - @game.players.each do |player|
@@ -18,4 +19,5 @@
         %td= player.user.name
         %td= player.user.ldap
         %td= player.faction_name
+        %td= player.hours_to_starve
         %td= player.score

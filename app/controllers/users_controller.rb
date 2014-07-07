@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :correct_user?, only: [:edit, :update]
+  before_action :correct_or_admin_user?, only: [:show, :edit, :update]
 
   def index
     @users = User.all
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'user was successfully updated.' }
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -35,6 +35,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:ldap, :email, :name)
+      params.require(:user).permit(:ldap, :email, :name, :phone_number)
     end
 end

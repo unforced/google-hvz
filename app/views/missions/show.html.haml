@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   %b Time:
   = @mission.time
@@ -8,8 +6,16 @@
   = @mission.title
 %p
   %b Description:
-  = @mission.description
+  :markdown
+    #{@mission.description}
+%p
+  %b Check In:
+  - if @mission.attendances.exists?(player_id: current_user.player)
+    You're checked in!
+  - else
+    = link_to "Check in for mission", check_in_mission_path(@mission)
 
-= link_to 'Edit', edit_mission_path(@mission)
-\|
+- if admin?
+  = link_to 'Edit', edit_mission_path(@mission)
+  \|
 = link_to 'Back', missions_path

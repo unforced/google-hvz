@@ -4,10 +4,15 @@ class Tag < ActiveRecord::Base
   belongs_to :tagee, class_name: Player
   has_many :feeds
 
+  validates_associated :feeds
+
   validate :validate_tagger
   validate :validate_tagee
+  validate :validate_time
 
   before_save :feed_self
+  before_save :zombify
+  before_save :award_points
   
   def tag_code=(tag_code)
     self.tagee = Player.find_by(tag_code: tag_code)
@@ -43,7 +48,19 @@ class Tag < ActiveRecord::Base
     errors.add(:tagger, 'Must be in the current game') unless tagger.game == Game.current
   end
 
+  def validate_time
+    errors.add(:time, 'Must not be in the future') if time.future?
+  end
+
   def feed_self
     self.feeds << Feed.new(player_id: self.id, time: Time.now)
+  end
+
+  def zombify
+    tagee.zombify
+  end
+
+  def award_points
+    tagger.increment(:points, 2)
   end
 end

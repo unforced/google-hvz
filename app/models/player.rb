@@ -3,6 +3,8 @@ class Player < ActiveRecord::Base
   belongs_to :game
   has_many :feeds
 
+  validates :user_id, uniqueness: { scope: :game_id }
+
   ZOMBIE = 0
   HUMAN = 1
   DECEASED = 2
@@ -42,7 +44,11 @@ class Player < ActiveRecord::Base
   end
 
   def last_fed
-    (Time.now-last_feed.time)
+    if last_feed
+      Time.now-last_feed.time
+    else
+      Time.now - game.start_time
+    end
   end
 
   def starves_in
@@ -50,10 +56,18 @@ class Player < ActiveRecord::Base
   end
 
   def hours_to_starve
-    "under #{(starves_in/3600).ceil} hours"
+    if zombie?
+      "under #{(starves_in/3600).ceil} hours"
+    else
+      "Staying alive!"
+    end
   end
 
   def feed_label
     "#{user.name} (Starves in #{hours_to_starve})"
+  end
+
+  def zombify
+    faction = ZOMBIE
   end
 end
