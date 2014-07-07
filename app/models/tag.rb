@@ -20,11 +20,11 @@ class Tag < ActiveRecord::Base
 
   def validate_tagee
     unless tagee
-      errors.add(:tagee, 'No player was found with that tag code.')
+      errors.add(:tag_code, 'No player was found with that tag code.')
       return
     end
-    errors.add(:tagee, 'Must be a human') unless tagee.human?
-    errors.add(:tagee, 'Must be in the current game') unless tagee.game == Game.current
+    errors.add(:tag_code, 'Is for a zombie') if tagee.zombie?
+    errors.add(:tag_code, 'Is for someone in another game') unless tagee.game == Game.current
   end
 
   def validate_tagger
