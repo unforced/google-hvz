@@ -16,6 +16,9 @@ class TagsController < ApplicationController
   # GET /tags/new
   def new
     @tag = Tag.new
+    if !current_user
+      flash[:error] = 'You must be signed in to submit a tag'
+    end
   end
 
   # POST /tags

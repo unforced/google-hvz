@@ -11,7 +11,7 @@ class Tag < ActiveRecord::Base
   after_save :award_points, unless: :admin_tag
   
   def tag_code=(tag_code)
-    self.tagee = Player.find_by(tag_code: tag_code)
+    self.tagee = Player.find_by(tag_code: tag_code.upcase)
   end
 
   def tag_code

@@ -10,10 +10,10 @@
     #{@mission.description}
 %p
   %b Check In:
-  - if @mission.attendances.exists?(player_id: current_user.player)
-    You're checked in!
+  - if @attendance
+    = link_to "You're checked in!. Edit Checkin", edit_attendance_path(@attendance)
   - else
-    = link_to "Check in for mission", check_in_mission_path(@mission)
+    = link_to "Check in for mission", new_attendance_path(mission_id: @mission.id)
 
 - if admin?
   = link_to 'Edit', edit_mission_path(@mission)

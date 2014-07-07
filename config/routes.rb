@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :attendances
+
   resources :tags
 
   resources :games do

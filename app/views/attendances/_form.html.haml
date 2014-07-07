@@ -1,0 +1,9 @@
+= simple_form_for(@attendance) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :selfie_url
+    = f.input :mission_id, as: :hidden
+
+  .form-actions
+    = f.button :submit, "Check In!"

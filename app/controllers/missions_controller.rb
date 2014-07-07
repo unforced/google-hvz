@@ -1,16 +1,6 @@
-class MissionsController < ApplicationController
+ class MissionsController < ApplicationController
   before_action :set_mission, only: [:show, :edit, :update, :check_in]
   before_action :admin_user?, only: [:new, :create, :edit, :update]
-
-  def check_in
-    @mission.attendances.new(player: current_user.player)
-    if @mission.save
-      flash[:success] = 'Checked in for the mission! You have earned 1 point!'
-    else
-      flash[:error] = 'Failed to check in! What have you done?!?!'
-    end
-    redirect_to @mission
-  end
 
   # GET /missions
   # GET /missions.json
@@ -21,6 +11,9 @@ class MissionsController < ApplicationController
   # GET /missions/1
   # GET /missions/1.json
   def show
+    if current_user
+      @attendance = @mission.attendances.find_by(player_id: current_user.player)
+    end
   end
 
   # GET /missions/new
