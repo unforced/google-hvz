@@ -1,0 +1,12 @@
+%p
+  Select a faction to filter texts. Leave it blank to send to all factions.
+= form_tag text_game_path(@game.id), method: :post do
+  = label_tag :faction_id, "Faction:"
+  = select_tag :faction_id, options_for_select([["Human", 1], ["Zombies", 0]], params[:faction_id]),
+    include_blank: true
+
+  %br
+  = label_tag :message
+  = text_field_tag :message
+  %br
+  = submit_tag "Submit"

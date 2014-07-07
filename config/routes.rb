@@ -7,7 +7,12 @@ Rails.application.routes.draw do
 
   resources :tags
 
-  resources :games
+  resources :games do
+    member do
+      get :text
+      post 'text' => 'games#text_post'
+    end
+  end
 
   resources :players
 

@@ -25,8 +25,9 @@
               %li= link_to 'Report Tag!', new_tag_path
               %li= link_to 'Missions', missions_path
             - if admin?
-              %li= link_to 'View Players (Admin)', players_path
-              %li= link_to 'View Tags (Admin)', tags_path
+              %li= link_to 'Players (Admin)', players_path
+              %li= link_to 'Tags (Admin)', tags_path
+              %li= link_to 'Text (Admin)', text_game_path(Game.current)
           %ul.nav.navbar-nav.navbar-right
             - if current_user
               - if current_user.player

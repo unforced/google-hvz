@@ -1,6 +1,28 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user?, only: [:new, :create, :edit, :update]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :text, :text_post]
+  before_action :admin_user?, only: [:new, :create, :edit, :update, :text, :text_post]
+
+  def text
+  end
+
+  def text_post
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token = ENV['TWILIO_AUTH_TOKEN']
+
+    # set up a client to talk to the Twilio REST API
+    @client = Twilio::REST::Client.new account_sid, auth_token
+    players = Player.includes(:user)
+    if params[:faction_id].present?
+      players = players.where(faction: params[:faction_id])
+    end
+    players.each do |player|
+      if player.user.phone_number.present?
+        @client.account.messages.create(from: '+14158057526', to: player.user.phone_number, body: params[:message])
+      end
+    end
+    binding.pry
+    redirect_to text_game_path(@game.id)
+  end
 
   # GET /games
   # GET /games.json
