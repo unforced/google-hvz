@@ -9,9 +9,10 @@
 %p
   %b Name
   = @user.name
-%p
-  %b Registration
-  = link_to @user.name, @user.player
+- if @user.player
+  %p
+    %b Registration
+    = link_to @user.name, @user.player
 
 = link_to 'Edit', edit_user_path(@user)
 \|

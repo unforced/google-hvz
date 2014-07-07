@@ -17,16 +17,18 @@
           %a.navbar-brand{:href => "/"} HvZ@Google
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
-            - if current_user && !current_user.registered?
-              %li= link_to 'Register', new_player_path
             - if Game.current
               %li= link_to 'Scoreboard', Game.current
+            - if current_user && !current_user.registered?
+              %li= link_to 'Register', new_player_path
+            - else
+              %li= link_to 'Report Tag!', new_tag_path
           %ul.nav.navbar-nav.navbar-right
-            %li
-              - if current_user
-                = link_to 'Sign Out', signout_path
-              - else
-                = link_to 'Sign In', signin_path
+            - if current_user
+              %li= link_to 'Profile', player_path(current_user.player)
+              %li= link_to 'Sign Out', signout_path
+            - else
+              %li= link_to 'Sign In', signin_path
     .container
       - flash.each do |key, value|
         %div{class: flash_class(key)}

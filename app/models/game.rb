@@ -5,4 +5,8 @@ class Game < ActiveRecord::Base
   def self.current
     Game.last
   end
+
+  def zombies
+    players.where(faction: Player::ZOMBIE)
+  end
 end

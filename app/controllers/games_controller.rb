@@ -5,12 +5,17 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    if Game.last
+      redirect_to Game.last
+    else
+      render text: "Make a game!"
+    end
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
+    @players = @game.players.order(score: :desc)
   end
 
   # GET /games/new

@@ -15,6 +15,7 @@ class TagsController < ApplicationController
   # GET /tags/new
   def new
     @tag = Tag.new
+    @zombies = Game.current.zombies.sort_by(&:starves_in)
   end
 
   # GET /tags/1/edit
@@ -25,7 +26,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-    @tag.tagger = current_user
+    @tag.tagger = current_user.player
 
     respond_to do |format|
       if @tag.save

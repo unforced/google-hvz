@@ -1,6 +1,7 @@
 class Player < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
+  has_many :feeds
 
   ZOMBIE = 0
   HUMAN = 1
@@ -28,11 +29,31 @@ class Player < ActiveRecord::Base
     faction == ZOMBIE
   end
 
+  def human?
+    faction == HUMAN
+  end
+
   def deceased?
     last_fed + 48.hours < Time.now
   end
 
+  def last_feed
+    feeds.order('time DESC').last
+  end
+
   def last_fed
-    1.days.ago
+    (Time.now-last_feed.time)
+  end
+
+  def starves_in
+    48.hours - last_fed
+  end
+
+  def hours_to_starve
+    "under #{(starves_in/3600).ceil} hours"
+  end
+
+  def feed_label
+    "#{user.name} (Starves in #{hours_to_starve})"
   end
 end

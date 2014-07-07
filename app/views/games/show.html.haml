@@ -1,3 +1,21 @@
-%ul
-  - @game.players.each do |player|
-    %li= player.user.name
+:css
+  .zombie {
+    background-color: #0C3;
+  }
+  .human {
+    background-color: #C93;
+  }
+%table.table.table-hover.table-bordered.table-responsive
+  %thead{style: 'font-weight:bold'}
+    %tr
+      %td Name
+      %td LDAP
+      %td Faction
+      %td Score
+  %tbody
+    - @game.players.each do |player|
+      %tr{class: player.zombie? ? 'zombie' : 'human'}
+        %td= player.user.name
+        %td= player.user.ldap
+        %td= player.faction_name
+        %td= player.score

@@ -1,11 +1,7 @@
 %p#notice= notice
 
 %p
-  %b Tagger:
-  = @tag.tagger_id
-%p
-  %b Tagee:
-  = @tag.tagee_id
+  #{@tag.tagger.user.ldap} tagged #{@tag.tagee.user.ldap}
 %p
   %b Time:
   = @tag.time

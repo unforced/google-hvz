@@ -2,9 +2,10 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :tagger_id
-    = f.input :tagee_id
+    = f.input :tag_code
     = f.input :time
+    = f.input :first_feed, collection: @zombies, label_method: :feed_label
+    = f.input :second_feed, collection: @zombies, label_method: :feed_label
 
   .form-actions
     = f.button :submit
