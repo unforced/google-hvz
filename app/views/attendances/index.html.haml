@@ -10,7 +10,10 @@
     %tr
       %td= link_to attendance.player.user.name, attendance.player
       %td= link_to attendance.mission.title, attendance.mission
-      %td= link_to attendance.selfie_url, attendance.selfie_url
+      %td
+        - if attendance.selfie_url.present?
+          = link_to attendance.selfie_url do
+            %img{src: attendance.selfie_url, height: 100}
 
 
 %br
