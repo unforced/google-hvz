@@ -24,6 +24,14 @@ class GamesController < ApplicationController
     redirect_to text_game_path(@game.id)
   end
 
+  def emails
+    @game = Game.find(params[:id])
+    @players = @game.players.includes(:user)
+    if params[:faction].present?
+      @players = @players.where(faction: params[:faction])
+    end
+  end
+
   # GET /games
   # GET /games.json
   def index

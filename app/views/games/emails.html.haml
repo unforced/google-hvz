@@ -1,0 +1,9 @@
+%p
+  Select a faction to filter emails. Leave it blank to get all.
+= form_tag emails_game_path(@game.id), method: :get do
+  = label_tag :faction, "Faction:"
+  = select_tag :faction, options_for_select([["Human", 1], ["Zombies", 0]], params[:faction]),
+    include_blank: true
+  = submit_tag "Submit"
+
+= @players.map { |r| "#{r.user.name} <#{r.user.email}>" }.join ','

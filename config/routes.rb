@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :games do
     member do
+      get :emails
       get :text
       post 'text' => 'games#text_post'
     end
