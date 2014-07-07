@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
   validate :validate_time
 
   after_save :zombify
-  before_save :award_points, unless: :admin_tag
+  after_save :award_points, unless: :admin_tag
   
   def tag_code=(tag_code)
     self.tagee = Player.find_by(tag_code: tag_code)
@@ -46,6 +46,6 @@ class Tag < ActiveRecord::Base
   end
 
   def award_points
-    tagger.increment(:points, 2)
+    tagger.increment!(:score, 2)
   end
 end
