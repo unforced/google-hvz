@@ -1,9 +1,8 @@
 %p
-  #{@tag.tagger.user.ldap} tagged #{@tag.tagee.user.ldap}
+  - if @tag.admin_tag
+    Admin tagged #{@tag.tagee.user.ldap}
+  - else
+    #{@tag.tagger.user.ldap} tagged #{@tag.tagee.user.ldap}
 %p
   %b Time:
   = @tag.time
-
-= link_to 'Edit', edit_tag_path(@tag)
-\|
-= link_to 'Back', tags_path

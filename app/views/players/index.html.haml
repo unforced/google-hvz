@@ -1,6 +1,6 @@
 %h1 Listing players
 
-%table
+%table.table
   %tr
     %th User
     %th Game
@@ -13,9 +13,9 @@
 
   - @players.each do |player|
     %tr
-      %td= player.user_id
+      %td= link_to player.user.name, player.user
       %td= player.game_id
-      %td= player.faction
+      %td= player.faction_name
       %td= player.tag_code
       %td= player.score
       %td= link_to 'Show', player

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :feeds
-
   resources :missions do
     member do
       get :check_in

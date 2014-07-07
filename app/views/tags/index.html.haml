@@ -1,23 +1,14 @@
 %h1 Listing tags
 
-%table
+%table.table
   %tr
     %th Tagger
     %th Tagee
     %th Time
     %th
-    %th
-    %th
 
   - @tags.each do |tag|
     %tr
-      %td= tag.tagger_id
-      %td= tag.tagee_id
+      %td= tag.admin_tag ? 'Admin' : tag.tagger.user.name
+      %td= tag.tagee.user.name
       %td= tag.time
-      %td= link_to 'Show', tag
-      %td= link_to 'Edit', edit_tag_path(tag)
-      %td= link_to 'Destroy', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Tag', new_tag_path

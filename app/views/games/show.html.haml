@@ -5,19 +5,20 @@
   .human {
     background-color: #C93;
   }
+
 %table.table.table-hover.table-bordered.table-responsive
   %thead{style: 'font-weight:bold'}
     %tr
       %td Name
       %td LDAP
-      %td Faction
-      %td Time to Starvation
+      - if zombie?
+        %td Faction
       %td Score
   %tbody
     - @game.players.each do |player|
-      %tr{class: player.zombie? ? 'zombie' : 'human'}
+      %tr{class: zombie? ? (player.zombie? ? 'zombie' : 'human') : ''}
         %td= player.user.name
         %td= player.user.ldap
-        %td= player.faction_name
-        %td= player.hours_to_starve
+        - if zombie?
+          %td= player.faction_name
         %td= player.score

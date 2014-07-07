@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update]
-  before_action :admin_user?, only: [:edit, :update]
+  before_action :admin_user?, only: [:index, :edit, :update]
   before_action :correct_or_admin_user?, only: [:show]
 
   # GET /players

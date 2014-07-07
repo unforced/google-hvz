@@ -4,8 +4,9 @@
   .form-inputs
     = f.input :tag_code
     = f.input :time
-    = f.input :first_feed, collection: @zombies, label_method: :feed_label
-    = f.input :second_feed, collection: @zombies, label_method: :feed_label
+    - if admin?
+      = label_tag :admin_tag
+      = check_box_tag :admin_tag
 
   .form-actions
     = f.button :submit
