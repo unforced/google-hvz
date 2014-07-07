@@ -11,14 +11,8 @@
     %tr
       %td Name
       %td LDAP
-      - if zombie?
-        %td Faction
-      %td Score
   %tbody
     - @players.each do |player|
       %tr{class: zombie? ? (player.zombie? ? 'zombie' : 'human') : ''}
         %td= player.user.name
         %td= player.user.ldap
-        - if zombie?
-          %td= player.faction_name
-        %td= player.score
