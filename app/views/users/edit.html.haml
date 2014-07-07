@@ -6,6 +6,8 @@
     = f.input :email
     = f.input :name
     = f.input :phone_number
+    - if admin?
+      = f.input :admin
 
   .form-actions
     = f.button :submit
