@@ -2,15 +2,16 @@
 
 %table
   %tr
-    %th
-    %th
-    %th
+    %th Player
+    %th Mission
+    %th Selfie URL
 
   - @attendances.each do |attendance|
     %tr
-      %td= link_to 'Show', attendance
-      %td= link_to 'Edit', edit_attendance_path(attendance)
-      %td= link_to 'Destroy', attendance, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to attendance.player.user.name, attendance.player
+      %td= link_to attendance.mission.title, attendance.mission
+      %td= link_to attendance.selfie_url, attendance.selfie_url
+
 
 %br
 
