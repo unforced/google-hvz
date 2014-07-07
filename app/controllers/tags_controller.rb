@@ -1,6 +1,5 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show]
-  before_action :admin_user?, only: [:index, :show]
 
   # GET /tags
   # GET /tags.json
