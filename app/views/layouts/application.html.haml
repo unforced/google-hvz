@@ -26,7 +26,8 @@
               %li= link_to 'Missions', missions_path
           %ul.nav.navbar-nav.navbar-right
             - if current_user
-              %li= link_to 'Profile', player_path(current_user.player)
+              - if current_user.player
+                %li= link_to 'Profile', player_path(current_user.player)
               %li= link_to 'Sign Out', signout_path
             - else
               %li= link_to 'Sign In', signin_path
