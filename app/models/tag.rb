@@ -23,6 +23,7 @@ class Tag < ActiveRecord::Base
   end
 
   def first_feed=(feedee_id)
+    return unless Player.exists?(feedee_id)
     self.feeds << Feed.new(player_id: feedee_id, time: Time.now)
   end
 
