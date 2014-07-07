@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
   validate :validate_tagee
   validate :validate_time
 
-  before_save :zombify
+  after_save :zombify
   before_save :award_points, unless: :admin_tag
   
   def tag_code=(tag_code)
@@ -42,7 +42,7 @@ class Tag < ActiveRecord::Base
   end
 
   def zombify
-    tagee.zombify
+    tagee.update_attribute(:faction, Player::ZOMBIE)
   end
 
   def award_points
