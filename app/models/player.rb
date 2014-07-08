@@ -20,14 +20,10 @@ class Player < ActiveRecord::Base
     score = 0
     score += tags.count * 2
     score += attendances.count * 1
-    survived_til = tagged.first.try(:time) || Time.now
+    survived_til = human? ? Time.now : tagged.first.try(:time) || Time.now
     hours_survived = (survived_til - Game.current.start_time)/3600
     score += (hours_survived/12).round
     update_attribute(:score, score)
-  end
-
-  def tagged_at
-    tagged.first.try(:time)
   end
 
   def self.generate_code
