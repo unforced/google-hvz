@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :edit, :update]
-  before_action :admin_user?, only: [:index, :edit, :update]
+  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user?, only: [:index, :edit, :update, :destroy]
   before_action :correct_or_admin_user?, only: [:show]
 
   # GET /players
@@ -55,6 +55,16 @@ class PlayersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # DELETE /players/1
+  # DELETE /players/1.json
+  def destroy
+    @player.destroy
+    respond_to do |format|
+      format.html { redirect_to players_path, notice: 'Player was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
