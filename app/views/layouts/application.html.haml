@@ -17,14 +17,14 @@
           %a.navbar-brand{:href => "/"} HvZ@Google
         .navbar-collapse.collapse
           %ul.nav.navbar-nav
-            - if Game.current
-              %li= link_to 'Scoreboard', Game.current
-            - if current_user && !current_user.registered?
-              %li= link_to 'Register', new_player_path
-            - else
-              %li= link_to 'Report Tag!', new_tag_path
-              %li= link_to 'Missions', missions_path
-              %li= link_to 'Tags', tags_path
+            - if current_user
+              - if !current_user.registered?
+                %li= link_to 'Register', new_player_path
+              - else
+                %li= link_to 'Scoreboard', Game.current
+                %li= link_to 'Report Tag!', new_tag_path
+                %li= link_to 'Missions', missions_path
+                %li= link_to 'Tags', tags_path
             - if admin?
               %li= link_to 'Players*', players_path
               %li= link_to 'Users*', users_path
