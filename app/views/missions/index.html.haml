@@ -5,12 +5,15 @@
     %tr
       %th Title
       %th Time
+      %th Checked In?
 
   %tbody
     - @missions.each do |mission|
       %tr
         %td= link_to mission.title, mission
         %td= link_to mission.time, mission
+        - if current_user
+          %td= mission.attendances.find_by(player_id: current_user.player_id)
 
 - if admin?
   %br
