@@ -22,7 +22,7 @@ class Player < ActiveRecord::Base
     score += attendances.count * 1
     survived_til = tagged.first.try(:time) || Time.now
     hours_survived = (survived_til - Game.current.start_time)/3600
-    score += (hours_survived/12).floor
+    score += (hours_survived/12).round
     update_attribute(:score, score)
   end
 
