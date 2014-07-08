@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
   before_action :confirm_owner, only: [:show, :edit, :update, :destroy]
   before_action :admin_user?, only: [:index]

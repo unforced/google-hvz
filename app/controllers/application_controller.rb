@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :admin_user?
   helper_method :correct_or_admin_user?
+  helper_method :authenticate_user!
 
   private
     def current_user

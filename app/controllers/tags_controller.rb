@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show]
+  before_action :authenticate_user!
 
   # GET /tags
   # GET /tags.json
@@ -28,6 +29,11 @@ class TagsController < ApplicationController
       @tag.admin_tag = true
     else
       @tag.tagger = current_user.player
+      if Tag.exists?(tagee_id: @tag.tagee_id, admin_tag: true)
+        @tag = Tag.find_by(tagee_id: @tag.tagee_id, admin_tag: true)
+        @tag.admin_tag = false
+        @tag.tagger = current_user.player
+      end
     end
 
     respond_to do |format|
