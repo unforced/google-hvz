@@ -13,6 +13,7 @@ class Player < ActiveRecord::Base
   class << self
     def update_scores
       Player.all.each(&:update_score)
+      Player.delay_for(1.hour).update_scores
     end
   end
 
