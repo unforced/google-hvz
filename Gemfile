@@ -20,6 +20,7 @@ gem 'unicorn-rails'
 gem 'rails_12factor'
 gem 'redcarpet'
 gem 'twilio-ruby'
+gem 'sidekiq'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
