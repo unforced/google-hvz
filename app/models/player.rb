@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
   belongs_to :game
   has_many :tags, foreign_key: 'tagger_id', class_name: Tag.name
   has_many :tagged, foreign_key: 'tagee_id', class_name: Tag.name
+  has_many :attendances
 
   validates :user_id, uniqueness: { scope: :game_id }
 
