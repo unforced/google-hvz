@@ -12,8 +12,7 @@
       %tr
         %td= link_to mission.title, mission
         %td= link_to mission.time, mission
-        - if current_user
-          %td= mission.attendances.find_by(player_id: current_user.player_id)
+        %td= current_user && mission.attendances.exists?(player_id: current_user.player.id)
 
 - if admin?
   %br
