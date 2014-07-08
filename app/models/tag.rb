@@ -7,8 +7,8 @@ class Tag < ActiveRecord::Base
   validate :validate_tagee
   validate :validate_time
 
-  after_save :zombify
-  after_save :award_points, unless: :admin_tag
+  after_create :zombify
+  after_create :award_points, unless: :admin_tag
   
   def tag_code=(tag_code)
     self.tagee = Player.find_by(tag_code: tag_code.upcase)

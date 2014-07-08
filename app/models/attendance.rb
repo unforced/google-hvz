@@ -5,7 +5,7 @@ class Attendance < ActiveRecord::Base
   validates :player, presence: true
   validates :mission_id, uniqueness: { scope: :player_id }
 
-  after_save :award_points
+  after_create :award_points
 
   # On attending, award player 1 point
   def award_points
