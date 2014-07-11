@@ -9,6 +9,9 @@
 
   - @tags.each do |tag|
     %tr
-      %td= tag.admin_tag ? 'Admin' : tag.tagger.user.name
+      - if tag.tagger
+        %td= tag.admin_tag ? 'Admin' : tag.tagger.user.name
+      - else
+        %td Someone?
       %td= tag.tagee.user.name
       %td= tag.time
