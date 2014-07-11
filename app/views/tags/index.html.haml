@@ -13,5 +13,8 @@
         %td= tag.admin_tag ? 'Admin' : tag.tagger.user.name
       - else
         %td Someone?
-      %td= tag.tagee.user.name
+      - if tag.tagee
+        %td= tag.tagee.user.name
+      -else
+        %td Someone?
       %td= tag.time
